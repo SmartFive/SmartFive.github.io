@@ -1,0 +1,619 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>勇攀数理高峰</title>
+	
+	<script>  /* Whole page font-size recalculate */
+		function resizeNow(){
+			let Width = document.documentElement.clientWidth;
+			document.documentElement.style.fontSize = 16 * (Width / 1920) + 'px';
+		}
+		window.onload=resizeNow();
+	</script>
+	
+	
+	<style>
+	
+		*{					/*remove the blank between navbar & body */
+			margin: 0;		/*check this if unexpected bug occurred*/
+			padding: 0;
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+		}
+	
+		html,body{
+			scroll-behavior:smooth;
+		}
+		
+		body{
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+		
+		.nav{				/*navbar def*/
+			width:100%;
+			height:8vh;
+			background-color: #816d66;
+			position: fixed;
+			z-index: 999;
+			font-family: "Eras Medium ITC","Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+		}
+		
+		.nav a{				/*remove _ of navbar link*/			
+			text-decoration: none;
+			color:#FFFFFF;
+			display: block;
+		}
+		
+		
+		.navbox{		/*navbar alignment*/
+			height: inherit;
+			width: 12vw;
+			display: inline-block;
+			height: 8vh;
+			line-height: 8vh ;
+			font-size: 2.25em ;	
+			float: left;
+			color: #FFFFFF;
+			text-align: center;
+		}
+	
+		.page{
+			height: 92vh;
+			background-color: #F7F5F2;
+			overflow-y: hidden; 
+			background-color: rgba(176,240,240,0.30);
+		}
+	
+		.content{
+			margin-top: 5vh;
+			margin-left: 10vw;
+			height: 82vh;
+			width: 88vw; 
+			background-color: antiquewhite;
+		}
+
+		.bg-filter {
+			background-image: url(https://s3.bmp.ovh/imgs/2022/06/17/b39276c1f611d768.jpg);
+			background-size:cover ;
+			-webkit-filter: blur(1px);
+			-moz-filter: blur(1px);
+			filter: blur(1px) opacity(0.6) brightness(1.1);
+		}
+	
+		#title-box{
+			margin-left: 10vw;
+			height: 40vh; 
+			width: 68vw;
+			background-color:rgba(255,255,255,0.75)
+		}
+	
+		#heading{
+			text-align: center;
+			line-height: 28vh;
+			font-size: 15vh;
+			cursor: default;
+		}
+	
+		#sub-heading{
+			margin-left: 20vw; 
+			text-align: center;
+			line-height: 5vh;
+			font-size: 5vh;
+			cursor: default;
+		}
+	
+		.start-button{
+			border: solid;
+			border-radius: 40px;
+			border-color: #CDBEDD;
+			background-color: rgba(227,186,202,0.95);
+			width: 14vw;
+			height: 10vh;
+			margin-top: 10vh;
+			margin-left: 37vw;
+			font-size: 8vh;
+			line-height: 10vh;
+			text-align: center;
+			font-family: courier,serif;
+			cursor: pointer;
+		}
+		
+		.info{
+			margin-left: 25vw; 
+			width:38vw;
+			height:36vh;
+			background-color: rgba(233,245,255,0.8);
+			border-radius: 20px;
+			border: solid 1px #220000;
+			font-family: courier,sans-serif,serif;
+			margin-top: 23vh;
+			cursor: default;
+		}
+	
+		.info-title{
+			padding-top: 2vh;
+			padding-left: 2vw;
+			font-weight: 1000;
+			font-size: 2.5em;
+		}
+	
+		.info-text{
+			padding-top: 1vh;
+			text-align: center;
+			font-size: 2em;
+			line-height: 4vh;
+		}
+	
+		.info-hide{
+			line-height: 3vh;
+			background-color: #444444;
+			text-align: center;
+			font-size: 1.75em;
+		}
+	    
+		.OK-button{
+			width: 8vw;
+			height: 5vh;
+			border: none;
+			background-color: #1166FF;
+			color: #fff;
+			font-size: 3.5vh;
+			border-radius: 20px;
+			cursor: pointer;
+		}
+	
+		.OK-button:hover{
+			width: 8vw;
+			height: 5vh;
+			border: none;
+			background-color: #4488FF;
+			color: #fff;
+			font-size: 3.5vh;
+			border-radius: 20px;
+			cursor: pointer;
+		}
+	
+		#matrix table{
+			background-color: #8CCAFE;
+			height: 60vh;
+			margin-top: 11vh;
+			width: 35vw;
+			margin-left: 15vw;
+			border: solid thick #44AAFF;
+		}
+		
+		#matrix td{
+			background-color: #E9F5FF;
+			text-align: center;
+			vertical-align: middle;
+			font-size: 6vh;
+			font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+			cursor: pointer;
+		}
+		    
+
+	</style>
+	
+
+</head>
+	
+	
+
+	
+<body style="background-color: #F5F7F2; overflow: hidden"> 
+	<div class="nav">		
+	  <div class="document" style="margin-left: 75vw">			<!-- contents of navbar -->
+			<div class="navbox" id="box1" onmouseover="omoa(id)" onmouseout="omob(id)" onClick="navstart()">
+				<a href="#" id="box1a" onmouseover="omoa_a(id)" onmouseout="omob_a(id)" onClick="navstart()">开始&nbsp;</a>
+		  </div>
+			<div class="navbox" id="box2" onmouseover="omoa(id)" onmouseout="omob(id)" onClick="navintro()">
+				<a href="#" id="box2a" onmouseover="omoa_a(id)" onmouseout="omob_a(id)" onClick="navintro()">开发介绍</a>
+			</div>
+
+			
+			<script>		/* JS func for navbar color change and display */
+				
+				function omoa(e){
+					document.getElementById(e+"a").style.backgroundColor="#695954";
+					document.getElementById(e).style.backgroundColor="#695954";
+				}
+				function omob(e){
+					document.getElementById(e+"a").style.backgroundColor="#816d66";
+					document.getElementById(e).style.backgroundColor="#816d66";
+				}
+				function omoa_a(e){
+					document.getElementById(e).style.backgroundColor="#695954";
+					document.getElementById(e.slice(0,-1)).style.backgroundColor="#695954";
+				}
+				function omob_a(e){
+					document.getElementById(e).style.backgroundColor="#816d66";
+					document.getElementById(e.slice(0,-1)).style.backgroundColor="#816d66";
+				}
+				function navstart(){
+					var h=window.innerHeight;
+					window.scrollTo(0,0);
+				}
+				function navintro(){
+					var h=window.innerHeight;
+					window.scrollTo(0,4*h);
+				}
+			
+			</script>
+			
+		</div>
+	</div>
+	
+	<div class="main" id="main" style="height: 284vh;">
+		<div style="height: 8vh"></div>		<!-- blank for the navbar -->
+		<!-- tips: whole page = (8vh)*navbar + (3page)*(92vh)*mainpage -->
+		<div class="page" id="page1">												<!-- page1 -->
+			<div class="content">
+				<div class="content bg-filter" style="margin-left: 0;">
+					<div style="height:7vh;"></div>
+					<div id="title-box">
+						<div id="heading">勇攀数理高峰</div>
+						<div id="sub-heading"><del>国科大特色小游戏</del></div>
+					</div>
+				
+					<div class="start-button" id="start-button" onMouseOver="StartOver()" onMouseOut="StartOut()" onMouseDown="StartDown()" onMouseUp="StartUp()">
+						<b>START</b>
+					</div>
+					
+					<script>
+						
+						function StartOver(){
+							var e=document.getElementById("start-button");
+							e.style.width="16vw";
+							e.style.height="11vh";
+							e.style.marginTop="9.5vh";
+							e.style.marginLeft="36vw";
+							e.style.fontSize="9vh";
+							e.style.lineHeight="11vh";
+						}
+						function StartOut(){
+							var e=document.getElementById("start-button");
+							e.style.width="14vw";
+							e.style.height="10vh";
+							e.style.marginTop="10vh";
+							e.style.marginLeft="37vw";
+							e.style.fontSize="8vh";
+							e.style.lineHeight="10vh";
+						}
+						function StartDown(){
+							var e=document.getElementById("start-button");
+							e.style.width="16vw";
+							e.style.height="11vh";
+							e.style.marginTop="9.5vh";
+							e.style.marginLeft="36vw";
+							e.style.fontSize="9vh";
+							e.style.lineHeight="11vh";
+							e.style.backgroundColor="rgba(187,146,162,1)";
+						}
+						function StartUp(){
+							var h=window.innerHeight;
+							var e=document.getElementById("start-button");
+							window.scrollBy(0,0.9206*h);
+							e.style.backgroundColor="rgba(227,186,202,0.95)";
+						}
+						
+					</script>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="page" id="page2">												<!-- page2 -->
+			<div class="content">
+				<div id="score1" style="height: 0.01vh;"></div>
+				<div class="info" id="info1" >
+					<p class="info-title">Task 1 of 1</p>
+					<p class="info-text">
+						一个十分简单的问题:<br>
+						将下面这个8*8的矩阵变为对称矩阵吧。<br>
+						点击一个数字可以使其在0、1之间切换！<br>
+						单击“OK”开始计时。
+					</p>
+					<p class="info-hide" id="hide1" onMouseOver="show(id)" OnMouseOut="hide(id)">
+						Warning:有些数字是会随着时间而变化的！请尽快完成！
+					</p>
+					<script>
+						function show(e){
+							var k=document.getElementById(e);
+							k.style.backgroundColor="rgba(233,245,255,0.8)";
+						}
+						function hide(e){
+							var k=document.getElementById(e);
+							k.style.backgroundColor="#444444";
+						}
+					</script>
+					<p style="text-align: center;line-height: 10vh;">
+						<button class="OK-button" onclick="Start1()">OK</button>
+					</p>
+					<script>
+						 function Start1(){
+							 document.getElementById("info1").style.display="none";
+							 document.getElementById("matrix").style.display="inline-block";
+							 document.getElementById("timer").style.display="inline-block";
+							 Game1();
+						 }
+					</script>
+				</div>
+				<div class="info" id="info-after1" style="display: none">
+					<p class="info-title">Task 1 of 1</p>
+					<p class="info-text" id="ans1">
+						问题已解决！<br>
+						单击“Again”重试<br>
+						单击“Done”查看结果。
+					</p>
+					
+					<p style="text-align: center;line-height: 10vh;">
+						<button class="OK-button" onclick="Start1()">Again</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="OK-button" onClick="PageDn()">Done</button>
+					</p>
+					<script>
+						 function Start1(){
+							 document.getElementById("info1").style.display="none";
+							 document.getElementById("info-after1").style.display="none";
+							 document.getElementById("matrix").style.display="inline-block";
+							 document.getElementById("timer").style.display="inline-block";
+							 Game1();
+						 }
+					</script>
+				</div>
+				
+				<div id="matrix" style="display: inline-block;DISPLAY:NONE;">
+					<table>
+						<tr>	
+							<td class="cell"  id="a11"></td>	
+							<td class="cell"  id="a12"></td>	
+							<td class="cell"  id="a13"></td>	
+							<td class="cell"  id="a14"></td>	
+							<td class="cell"  id="a15"></td>
+							<td class="cell"  id="a16"></td>
+							<td class="cell"  id="a17"></td>
+							<td class="cell"  id="a18"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a21"></td>	
+							<td class="cell"  id="a22"></td>	
+							<td class="cell"  id="a23"></td>	
+							<td class="cell"  id="a24"></td>	
+							<td class="cell"  id="a25"></td>
+							<td class="cell"  id="a26"></td>
+							<td class="cell"  id="a27"></td>
+							<td class="cell"  id="a28"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a31"></td>	
+							<td class="cell"  id="a32"></td>	
+							<td class="cell"  id="a33"></td>	
+							<td class="cell"  id="a34"></td>	
+							<td class="cell"  id="a35"></td>
+							<td class="cell"  id="a36"></td>
+							<td class="cell"  id="a37"></td>
+							<td class="cell"  id="a38"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a41"></td>	
+							<td class="cell"  id="a42"></td>	
+							<td class="cell"  id="a43"></td>	
+							<td class="cell"  id="a44"></td>	
+							<td class="cell"  id="a45"></td>
+							<td class="cell"  id="a46"></td>
+							<td class="cell"  id="a47"></td>
+							<td class="cell"  id="a48"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a51"></td>	
+							<td class="cell"  id="a52"></td>	
+							<td class="cell"  id="a53"></td>	
+							<td class="cell"  id="a54"></td>	
+							<td class="cell"  id="a55"></td>
+							<td class="cell"  id="a56"></td>
+							<td class="cell"  id="a57"></td>
+							<td class="cell"  id="a58"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a61"></td>	
+							<td class="cell"  id="a62"></td>	
+							<td class="cell"  id="a63"></td>	
+							<td class="cell"  id="a64"></td>	
+							<td class="cell"  id="a65"></td>
+							<td class="cell"  id="a66"></td>
+							<td class="cell"  id="a67"></td>
+							<td class="cell"  id="a68"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a71"></td>	
+							<td class="cell"  id="a72"></td>	
+							<td class="cell"  id="a73"></td>	
+							<td class="cell"  id="a74"></td>	
+							<td class="cell"  id="a75"></td>
+							<td class="cell"  id="a76"></td>
+							<td class="cell"  id="a77"></td>
+							<td class="cell"  id="a78"></td>
+						</tr>
+						<tr>	
+							<td class="cell"  id="a81"></td>	
+							<td class="cell"  id="a82"></td>	
+							<td class="cell"  id="a83"></td>	
+							<td class="cell"  id="a84"></td>	
+							<td class="cell"  id="a85"></td>
+							<td class="cell"  id="a86"></td>
+							<td class="cell"  id="a87"></td>
+							<td class="cell"  id="a88"></td>
+						</tr>
+					</table>
+					<script>
+						
+						
+						function Game1(){
+							let a=[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
+							//var a=new Array(8);
+							//for(var i=0;i<8;i++){
+							//	a[i]=new Array(8);
+							//}
+							let check=[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
+							let id="";
+							for(let i=0;i<8;i++){
+								for(let j=0;j<8;j++){
+									a[i][j]=Math.floor(Math.random()*10)%2;
+									id="a".concat(i+1,j+1);
+									document.getElementById(id).innerHTML=a[i][j];
+									if(i>j){
+										if(a[i][j]===a[j][i]){
+											check[i][j]=0;
+										}
+										else{
+											check[i][j]=1;
+										}
+									}
+								}
+							}
+							
+							let d;
+							
+							let flag1=setInterval(function(){
+								let i=Math.floor(Math.random()*16)%8;
+								let j=Math.floor(Math.random()*16)%8;
+								a[i][j]=a[i][j]^1;
+								document.getElementById("a".concat(i+1,j+1)).innerHTML=a[i][j];
+								if(a[i][j]===a[j][i]){
+									check[max(i,j)][min(i,j)]=0;
+								}
+								else{
+									check[max(i,j)][min(i,j)]=1;
+								}
+								d=0;
+								for(let ii=0;ii<8;ii++){
+									for(let jj=0; jj<8&&ii!=jj; jj++){
+										d=d+check[ii][jj];
+									}
+								}
+								if(d==0){
+										clear();
+									}
+								
+							},1000);
+							
+							let m,s,ms,m_,s_,ms_,data;
+							let times=document.getElementById("timedata");
+							m=0;s=0;ms=0;data=0;
+							let flag2=setInterval(function(){
+								ms=ms+1;
+								if(ms==100){ms=0;s=s+1;}
+								if(s==60){s=0;m=m+1;}
+								if(ms<10){ms_="0".concat(ms);}else{ms_="".concat(ms);}
+								if(s<10){s_="0".concat(s);}else{s_="".concat(s);}
+								if(m<10){m_="0".concat(m);}else{m_="".concat(m);}
+								data="".concat(m_,":",s_,".",ms_);
+								times.innerHTML=data;
+								
+
+							},10);
+							
+							let cells=document.getElementsByClassName("cell");
+							
+							for(let t=0;t<64;t++){
+								cells[t].addEventListener("click",function temp(){
+									let x=Math.floor(t/8);
+									let y=t%8;
+									a[x][y]=a[x][y]^1;
+									check[max(x,y)][min(x,y)]=check[max(x,y)][min(x,y)]^1;
+									cells[t].innerHTML=a[x][y];
+									d=0;
+									for(let ii=0;ii<8;ii++){
+										for(let jj=0; jj<8&&ii!=jj; jj++){
+											d=d+check[ii][jj];
+										}
+									}
+									if(d==0){
+										clear();
+									}
+									
+								});
+							}
+							
+							function clear(){
+								clearInterval(flag1);
+								clearInterval(flag2);
+								document.getElementById("info-after1").style.display="block";
+							 	document.getElementById("matrix").style.display="none";
+							 	document.getElementById("timer").style.display="none";
+								document.getElementById("ans1").innerHTML="问题已解决！<br>用时为"+data+"<br>单击“Again”重试<br>单击“Done”查看开发介绍。";
+							}	
+						}
+						
+						function min(x,y){
+							if(x>y){return y;}
+							else {return x;}
+						}
+						
+						function max(x,y){
+							if(x<y){return y;}
+							else {return x;}
+						}
+						
+						function sum(l){
+							let ans;
+							for(let ii=0;ii<8;ii++){
+								for(let jj=0;jj<8;jj++){
+									ans=ans+l[ii][jj];
+								}
+							}
+							return ans;
+						}
+						
+				
+					</script>
+				</div>
+				<div id="timer" style="display: inline-block;margin-left: 10vw;DISPLAY:NONE;">
+					<p style="font-size: 4em;font-weight: 500;line-height: 10vh;">已用时间：</p>
+					<p id="timedata" style="font-size: 4em;font-weight: 1000;font-family: courier,serif;line-height: 10vh;">12:34:56.789</p>
+					<p style="line-height: 35vh; color: antiquewhite;">.</p>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="page" id="page3">												<!-- page4 -->
+			<div class="content">
+				<div class="intro" style="padding:20px;text-align: center;font-family:Cambria, Times, 'Times New Roman', 'serif'; font-size: 2rem ;font-weight: 500;line-height:8vh;">
+					<p>
+					Nice to meet you here!<br>
+					建设这个网站，做这些小游戏的契机<br>
+					其实是同学们口口相传的“扎实的数理基础”和计科导这门课<br>
+					中间用了些JS的EventListener来实现侦听矩阵的点击变换和鼠标的移动<br>
+					希望大家玩的开心^v^<br>
+					特此表明资料来源：<br>
+						<a style="text-decoration: none;color:#66CCFF" href="http://www.cd-pa.com/bbs/thread-3074407-1-1.html">封面图</a><br>
+						其余技术资料来源于runoob、W3CSchool及CSDN博客等开源社区。<br>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+
+		<script>
+			function PageUp(){
+				var h=window.innerHeight;
+				window.scrollBy(0,-0.9206*h); /* 0.9206 is a round make up of 0.92 */
+			}
+			
+			function PageDn(){
+				var h=window.innerHeight;
+				window.scrollBy(0,0.9206*h);
+			}
+		</script>
+		
+		
+</div>
+	
+		
+</body>
+</html>
+
